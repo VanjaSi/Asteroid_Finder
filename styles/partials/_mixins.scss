@@ -1,0 +1,20 @@
+@mixin flexDisplay ($direction) {
+    
+    display: flex;
+    flex-direction: $direction;
+    justify-content: space-around;
+}
+
+@mixin button(){
+    margin: 5px auto;
+    background-color: $primaryColor;
+    border-radius: 12px;
+    color: $textColor;
+    display: block;
+    font-size: 17px;
+    width: 80%;
+    padding: 5px 0;
+}
+@mixin hideShow($visibility) {
+        visibility: $visibility ;
+}

@@ -1,0 +1,81 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Quicksand', sans-serif;
+
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.main-header {
+    background-color: rgb(62, 76, 119);
+    color: rgb(236, 236, 236);
+    padding: 15px;
+    margin-bottom: 10px;
+   
+}
+.main-header  .nav-bar a{
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgb(12, 11, 11);
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(236, 236, 236);
+    letter-spacing: 0.2px;
+}
+.main-footer{
+    background-color: rgb(62, 76, 119);
+    color: rgb(236, 236, 236);
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+
+}
+#previous-page{
+    background-color: rgb(62, 76, 119);
+    color: rgb(236, 236, 236);
+    margin: 5px auto;
+    border-radius: 12px;
+    display: block;
+    font-size: 17px;
+    width: 10%;
+    padding: 5px 0;
+}
+#progress-wrapper{
+    height: 100vh;
+    width: 60%;
+    margin: 10px auto;
+}
+#progress-wrapper .progress-holder{
+    display: flex;
+    margin: 15px 0;
+}
+#progress-wrapper .progress-holder span {
+    background-color: rgb(17, 10, 10);
+    color: rgb(236, 236, 236);
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+#progress-wrapper .progress-holder .bar{
+    margin-left: 20px;
+    width: 100%;
+    height: 40px;
+    background-color: rgb(236, 236, 241);
+}
+#progress-wrapper .progress-holder .bar   .bar-div{
+    width: 0%;   /* increasing this increases progres*/
+    height: 37px;
+    line-height: 37px;
+    background-color:rgb(202, 242, 255); /*this color will change */
+    color: rgb(236, 236, 236);
+    text-align: center;
+}

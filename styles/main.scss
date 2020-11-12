@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import "./partials/variables";
+@import "./partials/mixins";
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Quicksand', sans-serif;
+
+}
+
+.main-header {
+    background-color: $primaryColor;
+    color: $textColor;
+    padding: 15px;
+    margin-bottom: 10px;
+    .nav-bar a{
+        text-decoration: none;
+        text-shadow: 2px 2px 4px $shadowText;
+        font-size: 20px;
+        font-weight: 900;
+        color: lighten($textColor, 20%);
+        letter-spacing: 0.2px;
+    }
+}
+.main-footer{
+    @extend .main-header;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+
+}
+.container{
+    width: 70%;
+}
+.main-content{
+    height: 100vh;
+
+    @include flexDisplay(column);
+    .form{
+        width: 50%;
+        margin: 10px auto;
+        text-align: center;
+        border: 2px solid $borderColor;
+        border-radius: 5px;
+        box-shadow: 2px -2px 7px -1px $shadowBox;
+        padding: 15px 0;
+        .error-message{
+            margin-top: 0;
+            background-color: $errMsg;
+            padding: 5px 0;
+            @include hideShow(hidden);
+
+        }
+        .error-message.error{
+            // @extend .error-message;
+            @include hideShow(visible);
+        }
+        .form-control{
+            margin: 5px 0;
+            display: inline-block;
+            label{
+                font-size: 17px;
+            }
+            .input-field{
+                outline: 0;
+                padding: 5px;
+                .error{
+                    border: 2px solid $errColor;
+                }
+                .success{
+                    border: 2px solid $successColor;
+
+                }
+            }
+           
+
+        }
+        .btn{
+           @include button();
+
+        }
+      
+    }
+    #table-container{
+        display: none;
+        #table{
+            @extend .form;
+            width: 75%;
+            border-collapse: collapse;
+            thead {
+                background-color: $primaryColor;
+                text-transform: uppercase;
+                color: $textColor;
+                font-size: 15px;
+                a i{
+                    color: $textColor;
+                }
+                th:hover{
+                    background-color: darken($primaryColor, 10%);
+                }
+            }
+            #tbody {
+                td{
+                    padding: 5px 0;
+                }
+            
+            }
+        }
+    }
+
+    #selected-container{
+        display: none;
+
+        .row{
+            @extend .form;
+
+            @include flexDisplay(row);
+
+            .select-wrapper{
+                width: 60%;
+                margin: 5px;
+                #asteroids-search{
+                    padding: 5px;
+                    margin-top: 5px;
+                    width: 194px;
+                    border: 1px solid $primaryColor;
+                    
+                    &:focus{
+                       outline: none;
+                   }
+                }
+              
+            }
+        
+            .collection-list-holder{
+                width: 60%;
+                #collection-list{
+                    font-size: 18px;
+                    list-style: none;
+
+                    .collection-item{
+                        @include flexDisplay(row);
+
+                        height: 20px;
+                        justify-content: space-between;
+                        border-bottom: 1px solid $primaryColor;
+                        font-size: 14px;
+                        margin: 10px;
+                        .fa{
+                            color: $errColor;
+                        
+                        }
+
+                    }
+            }
+              
+            }
+            #next-page{
+                @include button();
+                font-size: 12px;
+                margin-top: 10px;
+
+            }
+            
+        } 
+    
+           
+    }
+}
+
