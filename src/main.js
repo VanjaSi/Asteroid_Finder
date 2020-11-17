@@ -1,27 +1,25 @@
 
 import {asyncFetch}  from './api.js';
-import {getDates, showError, createTable, resetAll, createDataList, returnTableData, createCollectionList, deleteFromCollectionList, addToDataList} from './ui.js'
-import{storeItem, deleteItem, getItems, clearAll} from './storage.js'
+import { Asteroid, allAsteroids} from './asteroids.js';
+import {getDates, showError, resetAll,createTable,createDataList,buildUlCollectionList} from './ui.js'
 
 
 
-loadEventListeners();
+init();
  
-function loadEventListeners(){
+function init(){
+
 
     document.getElementById('search-btn').addEventListener('click', getAsteroids);
-    document.getElementById('asteroids-search').addEventListener('keypress', selectAsteroid);
-    document.getElementById('collection-list').addEventListener('click', deleteAsteroid);
-    document.getElementById('next-page').addEventListener('click', nextPage);
     
 }
 
 
 function getAsteroids(){
-    
+
+
     resetAll();
-    clearAll();
-    
+    allAsteroids.resetData();
 
     const dates = getDates();
     const dateValid = validateForm(dates);
@@ -31,91 +29,136 @@ function getAsteroids(){
         asyncFetch(dateValid.start, dateValid.end)
         
         .then(request => {
-            const asteroids = [];
                 for (const ast in request) {
                 
                     request[ast].forEach(element => {
                         if(element.is_potentially_hazardous_asteroid === true ){
+                            const id = element.id,
+                                  name = element.name,
+                                  date = element.close_approach_data[0].close_approach_date,
+                                  kmHour = element.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                                  diameterMin = element.estimated_diameter.kilometers.estimated_diameter_min,
+                                  diameterMax = element.estimated_diameter.kilometers.estimated_diameter_max;
                             
-                            asteroids.push({
-                                    id : element.id,
-                                    name: element.name,
-                                    date: element.close_approach_data[0].close_approach_date,
-                                    kmHour: element.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                                    diameterMin: element.estimated_diameter.kilometers.estimated_diameter_min,
-                                    diameterMax: element.estimated_diameter.kilometers.estimated_diameter_max
-                                });    
+                            
+                            const asteroid = new Asteroid(id,name,date,kmHour,diameterMin,diameterMax);
+                            
+                            allAsteroids.tableData = asteroid;
+                            allAsteroids.asteroidsDataCollection = asteroid;     
                         }
                     });   
             } 
 
-            createTable(asteroids);
-            const data = returnTableData();
-            createDataList(data); 
 
+            const data = allAsteroids.tableData;
+            const options = allAsteroids.asteroidsDataCollection;
+
+            if(data.length){
+
+                createTable(data);
+                createDataList(options); 
+                const btn = document.getElementById('asteroids-search').addEventListener('change', selectAsteroid);
+
+            }else{
+                showError('No Asteroids found for this date', 'error');
+
+            }
+            
         })
         .catch(error => {
             showError(error, 'error');
         });
     
-    }
-    
+    }    
+
 }
 
 
 function selectAsteroid(e){
 
-    if(e.which === 13){
         
         const searchInput = document.getElementById('asteroids-search');
-        const options = Array.from(document.getElementsByTagName('option'));
-        
-        options.forEach(option => {
+        const options = allAsteroids.asteroidsDataCollection;
 
-            if(searchInput.value.trim() === option.value){
-                createCollectionList(option.dataset.id, option.value);
-                searchInput.value = '';
-                option.remove();
+        options.forEach(asteroid => {
 
-                //store to LS
-                const item = {id: option.dataset.id, name: option.value}
-                storeItem(item);
+            if(searchInput.value.trim() === asteroid.name ){
+                
+                //adds item to collection list and removes it from data list
+                allAsteroids.updateAsteroidObject("select", asteroid);
+                
+                //returns updated data and collection lists
+                const dataList = allAsteroids.asteroidsDataCollection;
+                const collectionList = allAsteroids.listOfSelectedAsteroids;
+
+                //build the UI collection and data list options
+                createDataList(dataList);
+                buildUlCollectionList(collectionList);
+                searchInput.value="";
+
+                 
             }
+           
             
         });
-    }
+        document.getElementById('collection-list').addEventListener('click', deleteAsteroid);
+        document.getElementById('next-page').addEventListener('click', ()=> nextPage());
+                
+
 }
 
-//Deletes asteroid from ul collection list, ls and adds back to datalist
+
 function deleteAsteroid(e){
     
     if(e.target.classList.contains('remove-item')){
 
-        const itemToDelete = e.target.parentElement;
-        //delete fron ul collection list
-        deleteFromCollectionList(itemToDelete);
+        //gets the name of asteroid to be deleted
+        const itemToDelete = e.target.parentElement.textContent;
 
-        //add back as datalist option
-        addToDataList(itemToDelete);
+        //finds the item in collection 
+        const selected = allAsteroids.selectedAsteroidFromDelete(itemToDelete);
+
+        //deletes from collection list and adds to data list
+        allAsteroids.updateAsteroidObject("delete", selected);
 
 
-        //delete from LS
-        deleteItem(itemToDelete.dataset.id);
-        
+        //returns updated data and collection lists
+        const dataList = allAsteroids.asteroidsDataCollection;
+        const collectionList = allAsteroids.listOfSelectedAsteroids;
+
+        //build the UI collection and data list options
+        createDataList(dataList);
+        buildUlCollectionList(collectionList);
+
     }
     
 }
 
 
-function nextPage(){
 
-    const data = getItems();
+async function nextPage(){
+
+    const promise = new Promise((resolve)=>{
+         resolve(setToLS());
+    });
+
+
+    const response = await promise;
+    location.href="druga.html";
+
+}
+
+function setToLS(){
+
+        const collectionList = allAsteroids.listOfSelectedAsteroids;
+
+        localStorage.removeItem('asteroids');
+
+        const asteroids = JSON.parse(localStorage.getItem('asteroids')) || [];
+
+        collectionList.forEach(asteroid => asteroids.push(asteroid));
+        localStorage.setItem('asteroids', JSON.stringify(asteroids));
     
-    if(data.length > 0){
-        location.href="druga.html";
-    }else{
-        alert('Please select Asteroids from data list')
-    }
     
 }
 
@@ -139,4 +182,3 @@ function validateForm(inputs){
     return inputs;
 
 }
-

@@ -1,8 +1,13 @@
-import {getItems, clearAll} from './storage.js';
 import{fetchCloseToEarth} from './api.js'
 
 window.addEventListener('DOMContentLoaded', getData);
 
+
+function getItems(){
+    const asteroids = JSON.parse(localStorage.getItem('asteroids')) || [];	    
+    return asteroids;
+
+}
 
 
 function getData(){
@@ -109,7 +114,6 @@ previousBtn.addEventListener('click', backToMainPage);
 
 function backToMainPage(e){
 
-    clearAll();
     location.href="index.html";
     
 }

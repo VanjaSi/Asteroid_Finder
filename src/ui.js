@@ -7,9 +7,9 @@ const selectors = {
     tableContainer : document.getElementById('table-container'),
     selectorContainer : document.getElementById('selected-container'),
     ulCollection : document.getElementById('collection-list'),
-    asteroidsList : document.getElementById('asteroids-list'),
     tBody : document.getElementById('tbody')
 }
+
 
 function getDates(){
     return {
@@ -36,76 +36,105 @@ function clearInputs(){
     selectors.endDate.value = '';
 }
 
+
+
+    
+function clearDataList(){
+        
+    const dataOptions = Array.from(document.getElementById('asteroids-list').options);
+        if(dataOptions.length){
+            dataOptions.forEach(item => {
+                item.remove();
+            });
+        }
+}
+
+    //builds data list
+    function createDataList(asteroids){
+        
+        clearDataList();
+        if(asteroids.length){
+            asteroids.forEach(asteroid => {
+                const option = document.createElement('option');
+                option.setAttribute('value', asteroid.name);
+                const dataList = document.getElementById('asteroids-list')
+                dataList.appendChild(option);
+            });
+            selectors.selectorContainer.style.display = 'block';
+        }
+           
+    }
+
+    // builds the collection ui list
+
+    function buildUlCollectionList(collection){
+        deleteCollectionList();
+        if(collection.length){
+            collection.forEach(list => {
+                const li = document.createElement('li');
+                li.classList.add('collection-item');
+                li.textContent = list.name;
+                const i = document.createElement('i');
+                i.className = 'fa fa-times remove-item';
+                li.appendChild(i)
+                selectors.ulCollection.appendChild(li);
+            });
+        }
+      
+    }
+
+function deleteTable(){
+    const tBody = document.getElementById('tbody');
+    if(tBody.children){
+        
+            while(tBody.firstChild){
+                tBody.firstChild.remove();
+            }
+        
+    }
+
+}
+
 function createTable(asteroids){
-
-    clearInputs();
-    asteroids.forEach( ast => {
-        const tRow = document.createElement('tr');
-        tRow.dataset.id = ast.id;
-        tRow.classList.add('data-row');
-        const tData = [ast.date, ast.name, ast.kmHour, ast.diameterMin, ast.diameterMax];
-
-        tData.forEach( data => {
-            const td = document.createElement('td');
-            td.appendChild(document.createTextNode(data));
-            tRow.appendChild(td);
+        clearInputs();
+        deleteTable();
+        asteroids.forEach( ast => {
+            const tRow = document.createElement('tr');
+            tRow.dataset.id = ast.id;
+            tRow.classList.add('data-row');
+            const tData = [ast.date, ast.name, ast.kmHour, ast.diameterMin, ast.diameterMax];
+    
+            tData.forEach( data => {
+                const td = document.createElement('td');
+                td.appendChild(document.createTextNode(data));
+                tRow.appendChild(td);
+            });
+            selectors.tBody.appendChild(tRow);
         });
-        selectors.tBody.appendChild(tRow);
-    });
+        
+        selectors.tableContainer.style.display ='block';
+}
+
+
+
+function deleteCollectionList(){
     
-    selectors.tableContainer.style.display ='block';
-    
-}
-
-function returnTableData(){
-
-    return document.querySelectorAll('.data-row');
-}
-
-
-
-function createDataList(asteroids){
-    asteroids.forEach(ast => {
-        const option = document.createElement('option');
-        option.value = ast.firstChild.nextSibling.innerHTML;
-        option.dataset.id = ast.dataset.id;
-        selectors.asteroidsList.appendChild(option);
-    });
-    selectors.selectorContainer.style.display = 'block';
-
-}
-
-
-function addToDataList(ast){
-    
-    const option = document.createElement('option');
-    option.value = ast.textContent;
-    option.id = ast.dataset.id;
-    selectors.asteroidsList.appendChild(option);
-}
-
-function createCollectionList(id, value){
-
-       const li = document.createElement('li');
-       li.classList.add('collection-item');
-       li.dataset.id = id;
-       li.textContent = value;
-       const i = document.createElement('i');
-       i.className = 'fa fa-times remove-item';
-       li.appendChild(i)
-       selectors.ulCollection.appendChild(li);
-}
-
-function deleteFromCollectionList(current){
-    const id = current.dataset.id;
-    const list = document.querySelector(`.collection-item[data-id="${id}"]`);
-    list.remove();
+    const collection = Array.from(document.getElementById('collection-list').children);
+    if(collection){
+        collection.forEach(item => {
+            item.remove();
+        });
+    }
+  
 }
 
 function resetAll(){
-    const ulCollection = document.getElementById('collection-list');
-    const asteroidsList = document.getElementById('asteroids-list');
-    const tBody = document.getElementById('tbody');
+
+
+   const ulCollection = document.getElementById('collection-list');
+   const asteroidsList = document.getElementById('asteroids-list');
+   const tBody = document.getElementById('tbody');
+
     
     const selectors = [ulCollection,asteroidsList,tBody];
     if(selectors.length){
@@ -117,15 +146,11 @@ function resetAll(){
     }
    
 }
-
 export {
     getDates, 
     showError, 
-    createTable, 
-    createDataList, 
-    createCollectionList, 
-    deleteFromCollectionList,
-    addToDataList, 
-    returnTableData,
-    resetAll
+    createTable,
+    createDataList,
+    resetAll,
+    buildUlCollectionList,  
 }
