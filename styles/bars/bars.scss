@@ -1,0 +1,73 @@
+@import '../partials/mixins';
+@import '../partials/mixins';
+@import '../main.scss';
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	@include flexDisplay(column, center);
+	height: 100vh;
+	box-shadow: 1px 1px 5px -2px $shadowBox;
+	gap: 2rem;
+	#previous-page {
+		@include button();
+		width: 200px;
+
+		padding: 10px 15px;
+	}
+	#progress-wrapper {
+		width: 100%;
+		.progress-holder {
+			@include flexDisplay(row, space-between);
+			margin-bottom: 1rem;
+			span {
+				background-color: rgb(17, 10, 10);
+				color: rgb(236, 236, 236);
+				width: 200px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				font-size: 0.7rem;
+			}
+			.bar {
+				width: 100%;
+				height: 40px;
+				background-color: rgb(236, 236, 241);
+				.bar-div {
+					// width: inherit;
+					height: inherit;
+					width: 0%;
+					//  increasing this increases progres*/
+
+					line-height: 40px;
+
+					background-color: rgb(202, 242, 255); /*this color will change */
+					color: rgb(236, 236, 236);
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+// #progress-wrapper .progress-holder {
+// 	display: flex;
+// 	margin: 15px 0;
+// }
+// #progress-wrapper .progress-holder span {
+// 	background-color: rgb(17, 10, 10);
+// 	color: rgb(236, 236, 236);
+// 	width: 200px;
+// 	height: 40px;
+// 	line-height: 40px;
+// 	text-align: center;
+// }
+// #progress-wrapper .progress-holder .bar {
+// 	margin-left: 20px;
+// 	width: 100%;
+// 	height: 40px;
+// 	background-color: rgb(236, 236, 241);
+// }
+// #progress-wrapper .progress-holder .bar .bar-div {
+//
+// }

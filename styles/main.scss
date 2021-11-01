@@ -1,175 +1,214 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-@import "./partials/variables";
-@import "./partials/mixins";
+@import './partials/variables';
+@import './partials/mixins';
 
-
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
-body{
-    font-family: 'Quicksand', sans-serif;
-
-}
-
-.main-header {
-    background-color: $primaryColor;
-    color: $textColor;
-    padding: 15px;
-    margin-bottom: 10px;
-    .nav-bar a{
-        text-decoration: none;
-        text-shadow: 2px 2px 4px $shadowText;
-        font-size: 20px;
-        font-weight: 900;
-        color: lighten($textColor, 20%);
-        letter-spacing: 0.2px;
-    }
-}
-.main-footer{
-    @extend .main-header;
-    margin-bottom: 0;
-    margin-top: 10px;
-    text-align: center;
-
-}
-.container{
-    width: 70%;
-}
-.main-content{
-    height: 100vh;
-
-    @include flexDisplay(column);
-    .form{
-        width: 50%;
-        margin: 10px auto;
-        text-align: center;
-        border: 2px solid $borderColor;
-        border-radius: 5px;
-        box-shadow: 2px -2px 7px -1px $shadowBox;
-        padding: 15px 0;
-        .error-message{
-            margin-top: 0;
-            background-color: $errMsg;
-            padding: 5px 0;
-            @include hideShow(hidden);
-
-        }
-        .error-message.error{
-            // @extend .error-message;
-            @include hideShow(visible);
-        }
-        .form-control{
-            margin: 5px 0;
-            display: inline-block;
-            label{
-                font-size: 17px;
-            }
-            .input-field{
-                outline: 0;
-                padding: 5px;
-                .error{
-                    border: 2px solid $errColor;
-                }
-                .success{
-                    border: 2px solid $successColor;
-
-                }
-            }
-           
-
-        }
-        .btn{
-           @include button();
-
-        }
-      
-    }
-    #table-container{
-        display: none;
-        #table{
-            @extend .form;
-            width: 75%;
-            border-collapse: collapse;
-            thead {
-                background-color: $primaryColor;
-                text-transform: uppercase;
-                color: $textColor;
-                font-size: 15px;
-                a i{
-                    color: $textColor;
-                }
-                th:hover{
-                    background-color: darken($primaryColor, 10%);
-                }
-            }
-            #tbody {
-                td{
-                    padding: 5px 0;
-                }
-            
-            }
-        }
-    }
-
-    #selected-container{
-        display: none;
-
-        .row{
-            @extend .form;
-
-            @include flexDisplay(row);
-
-            .select-wrapper{
-                width: 60%;
-                margin: 5px;
-                #asteroids-search{
-                    padding: 5px;
-                    margin-top: 5px;
-                    width: 194px;
-                    border: 1px solid $primaryColor;
-                    
-                    &:focus{
-                       outline: none;
-                   }
-                }
-              
-            }
-        
-            .collection-list-holder{
-                width: 60%;
-                #collection-list{
-                    font-size: 18px;
-                    list-style: none;
-
-                    .collection-item{
-                        @include flexDisplay(row);
-
-                        height: 20px;
-                        justify-content: space-between;
-                        border-bottom: 1px solid $primaryColor;
-                        font-size: 14px;
-                        margin: 10px;
-                        .fa{
-                            color: $errColor;
-                        
-                        }
-
-                    }
-            }
-              
-            }
-            #next-page{
-                @include button();
-                font-size: 12px;
-                margin-top: 10px;
-
-            }
-            
-        } 
-    
-           
-    }
+body {
+	font-family: 'Quicksand', sans-serif;
 }
 
+.container {
+	width: 80%;
+	margin: 0 auto;
+	@include flexDisplay(column, center);
+	height: 100vh;
+}
+.main-content {
+	box-shadow: 1px 1px 5px -2px $shadowBox;
+	border-radius: 5px;
+
+	.app-name {
+		background-color: $shadowText;
+		color: white;
+		padding: 20px 20px 40px 20px;
+		border-radius: 5px 5px 0 0;
+		text-align: center;
+		font-size: 1rem;
+	}
+	.img {
+		background-image: url('../asteroid-svgrepo-com.svg');
+		background-repeat: no-repeat;
+		position: relative;
+		background-position: 6px 8px;
+		right: -50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		background-size: 40px;
+		margin-top: 0;
+	}
+	// Form section
+	section.form {
+		@include flexDisplay(column, center);
+
+		margin-bottom: 10px;
+		border-radius: 5px;
+
+		h2 {
+			margin-bottom: 1rem;
+			font-size: 0.8rem;
+		}
+		.error-message {
+			margin-top: 0;
+			padding: 5px 0;
+			@include hideShow(hidden);
+		}
+		.error-message.error {
+			@include hideShow(visible);
+		}
+		.form-control {
+			margin: 5px 0;
+			width: 400px;
+			text-align: center;
+
+			label {
+				font-size: 0.7rem;
+			}
+			.input-field {
+				outline: 0;
+				padding: 5px;
+				border: none;
+				border-bottom: 1px solid $primaryColor;
+				font-size: 0.7rem;
+				cursor: pointer;
+				.error {
+					border: 2px solid $errColor;
+				}
+				.success {
+					border: 2px solid $successColor;
+				}
+			}
+		}
+		.btn {
+			@include button();
+			width: 3rem;
+			padding: 10px 0;
+		}
+	}
+	// table section
+	#table-container {
+		display: none;
+		#table {
+			@extend .form;
+			width: 100%;
+
+			border-collapse: collapse;
+			thead {
+				background-color: $primaryColor;
+				text-transform: uppercase;
+				color: $textColor;
+				font-size: 0.3rem;
+				th {
+					padding: 10px 5px;
+					width: 20%;
+				}
+
+				a i {
+					color: $textColor;
+					padding: 2px;
+					text-align: right;
+				}
+				th:hover {
+					background-color: darken($primaryColor, 20%);
+				}
+			}
+			#tbody {
+				td {
+					padding: 5px 0;
+					border-bottom: 2px solid $primaryColor;
+					text-align: center;
+					font-size: 0.7rem;
+				}
+			}
+		}
+	}
+	// section selection
+	#selected-container {
+		// display: none;
+		margin: 50px 0;
+		text-align: center;
+
+		.row {
+			@extend .form;
+
+			@include flexDisplay(column, center);
+
+			.select-wrapper {
+				// width: 60%;
+				// margin: 5px;
+				#asteroids-search {
+					padding: 5px;
+					margin-top: 5px;
+					// width: 194px;
+					border: 1px solid $primaryColor;
+					border-radius: 5px;
+
+					&:focus {
+						outline: none;
+					}
+				}
+			}
+
+			.collection-list-holder {
+				// width: 60%;
+				#collection-list {
+					font-size: 18px;
+					list-style: none;
+
+					.collection-item {
+						@include flexDisplay(row, center);
+
+						height: 20px;
+						justify-content: space-between;
+						border-bottom: 1px solid $borderColor ;
+						font-size: 14px;
+						margin: 10px;
+						.fa {
+							color: $errColor;
+						}
+					}
+				}
+			}
+			#next-page {
+				@include button();
+				font-size: 12px;
+				margin-top: 10px;
+			}
+		}
+	}
+}
+@media screen and (min-width: 890px) {
+	.main-content {
+		.app-name {
+			font-size: 2rem;
+		}
+		.img {
+			margin-top: 10px;
+			width: 95px;
+			height: 90px;
+			background-size: 70px;
+		}
+		section.form {
+			h2 {
+				// margin-bottom: 1rem;
+				font-size: 1.5rem;
+			}
+			label {
+				font-size: 1.2rem;
+			}
+		}
+		#table-container #table {
+			thead {
+				font-size: 0.9rem;
+			}
+		}
+	}
+}

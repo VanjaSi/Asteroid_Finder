@@ -1,20 +1,29 @@
-@mixin flexDisplay ($direction) {
-    
-    display: flex;
-    flex-direction: $direction;
-    justify-content: space-around;
+@mixin flexDisplay($direction, $content) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $content;
+	align-items: center;
 }
 
-@mixin button(){
-    margin: 5px auto;
-    background-color: $primaryColor;
-    border-radius: 12px;
-    color: $textColor;
-    display: block;
-    font-size: 17px;
-    width: 80%;
-    padding: 5px 0;
+@mixin button() {
+	margin: 10px auto;
+	background-color: $primaryColor;
+	border-radius: 10px;
+	color: $textColor;
+	outline: none;
+	border: none;
+	text-transform: uppercase;
+	font-size: 0.5rem;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	padding: 10px 5px;
+
+	&:hover {
+		background-color: $textColor;
+		color: $shadowText;
+		font-size: 0.6rem;
+	}
 }
 @mixin hideShow($visibility) {
-        visibility: $visibility ;
+	visibility: $visibility;
 }

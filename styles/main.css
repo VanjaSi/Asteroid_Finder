@@ -1,211 +1,220 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: 'Quicksand', sans-serif;
-}
-
-.main-header, .main-footer {
-  background-color: #3e4c77;
-  color: #ececec;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-
-.main-header .nav-bar a, .main-footer .nav-bar a {
-  text-decoration: none;
-  text-shadow: 2px 2px 4px #0c0b0b;
-  font-size: 20px;
-  font-weight: 900;
-  color: white;
-  letter-spacing: 0.2px;
-}
-
-.main-footer {
-  margin-bottom: 0;
-  margin-top: 10px;
-  text-align: center;
+  font-family: "Quicksand", sans-serif;
 }
 
 .container {
-  width: 70%;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .main-content {
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
-
-.main-content .form, .main-content #table-container #table, .main-content #selected-container .row {
-  width: 50%;
-  margin: 10px auto;
-  text-align: center;
-  border: 2px solid rgba(119, 119, 119, 0.664);
+  box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
-  -webkit-box-shadow: 2px -2px 7px -1px rgba(0, 0, 0, 0.75);
-          box-shadow: 2px -2px 7px -1px rgba(0, 0, 0, 0.75);
-  padding: 15px 0;
 }
-
-.main-content .form .error-message, .main-content #table-container #table .error-message, .main-content #selected-container .row .error-message {
+.main-content .app-name {
+  background-color: #0c0b0b;
+  color: white;
+  padding: 20px 20px 40px 20px;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  font-size: 1rem;
+}
+.main-content .img {
+  background-image: url("../asteroid-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  position: relative;
+  background-position: 6px 8px;
+  right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-size: 40px;
   margin-top: 0;
-  background-color: rgba(255, 0, 0, 0.397);
+}
+.main-content section.form, .main-content #selected-container section.row, .main-content #table-container section#table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.main-content section.form h2, .main-content #selected-container section.row h2, .main-content #table-container section#table h2 {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.main-content section.form .error-message, .main-content #selected-container section.row .error-message, .main-content #table-container section#table .error-message {
+  margin-top: 0;
   padding: 5px 0;
   visibility: hidden;
 }
-
-.main-content .form .error-message.error, .main-content #table-container #table .error-message.error, .main-content #selected-container .row .error-message.error {
+.main-content section.form .error-message.error, .main-content #selected-container section.row .error-message.error, .main-content #table-container section#table .error-message.error {
   visibility: visible;
 }
-
-.main-content .form .form-control, .main-content #table-container #table .form-control, .main-content #selected-container .row .form-control {
+.main-content section.form .form-control, .main-content #selected-container section.row .form-control, .main-content #table-container section#table .form-control {
   margin: 5px 0;
-  display: inline-block;
+  width: 400px;
+  text-align: center;
 }
-
-.main-content .form .form-control label, .main-content #table-container #table .form-control label, .main-content #selected-container .row .form-control label {
-  font-size: 17px;
+.main-content section.form .form-control label, .main-content #selected-container section.row .form-control label, .main-content #table-container section#table .form-control label {
+  font-size: 0.7rem;
 }
-
-.main-content .form .form-control .input-field, .main-content #table-container #table .form-control .input-field, .main-content #selected-container .row .form-control .input-field {
+.main-content section.form .form-control .input-field, .main-content #selected-container section.row .form-control .input-field, .main-content #table-container section#table .form-control .input-field {
   outline: 0;
   padding: 5px;
+  border: none;
+  border-bottom: 1px solid #833cb3;
+  font-size: 0.7rem;
+  cursor: pointer;
 }
-
-.main-content .form .form-control .input-field .error, .main-content #table-container #table .form-control .input-field .error, .main-content #selected-container .row .form-control .input-field .error {
+.main-content section.form .form-control .input-field .error, .main-content #selected-container section.row .form-control .input-field .error, .main-content #table-container section#table .form-control .input-field .error {
   border: 2px solid red;
 }
-
-.main-content .form .form-control .input-field .success, .main-content #table-container #table .form-control .input-field .success, .main-content #selected-container .row .form-control .input-field .success {
+.main-content section.form .form-control .input-field .success, .main-content #selected-container section.row .form-control .input-field .success, .main-content #table-container section#table .form-control .input-field .success {
   border: 2px solid #05ca15;
 }
-
-.main-content .form .btn, .main-content #table-container #table .btn, .main-content #selected-container .row .btn {
-  margin: 5px auto;
-  background-color: #3e4c77;
-  border-radius: 12px;
-  color: #ececec;
-  display: block;
-  font-size: 17px;
-  width: 80%;
-  padding: 5px 0;
+.main-content section.form .btn, .main-content #selected-container section.row .btn, .main-content #table-container section#table .btn {
+  margin: 10px auto;
+  background-color: #833cb3;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.5rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  padding: 10px 5px;
+  width: 3rem;
+  padding: 10px 0;
 }
-
+.main-content section.form .btn:hover, .main-content #selected-container section.row .btn:hover, .main-content #table-container section#table .btn:hover {
+  background-color: white;
+  color: #0c0b0b;
+  font-size: 0.6rem;
+}
 .main-content #table-container {
   display: none;
 }
-
 .main-content #table-container #table {
-  width: 75%;
+  width: 100%;
   border-collapse: collapse;
 }
-
 .main-content #table-container #table thead {
-  background-color: #3e4c77;
+  background-color: #833cb3;
   text-transform: uppercase;
-  color: #ececec;
-  font-size: 15px;
+  color: white;
+  font-size: 0.3rem;
 }
-
+.main-content #table-container #table thead th {
+  padding: 10px 5px;
+  width: 20%;
+}
 .main-content #table-container #table thead a i {
-  color: #ececec;
+  color: white;
+  padding: 2px;
+  text-align: right;
 }
-
 .main-content #table-container #table thead th:hover {
-  background-color: #2d3755;
+  background-color: #4b2267;
 }
-
 .main-content #table-container #table #tbody td {
   padding: 5px 0;
+  border-bottom: 2px solid #833cb3;
+  text-align: center;
+  font-size: 0.7rem;
 }
-
 .main-content #selected-container {
-  display: none;
+  margin: 50px 0;
+  text-align: center;
 }
-
 .main-content #selected-container .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-.main-content #selected-container .row .select-wrapper {
-  width: 60%;
-  margin: 5px;
-}
-
 .main-content #selected-container .row .select-wrapper #asteroids-search {
   padding: 5px;
   margin-top: 5px;
-  width: 194px;
-  border: 1px solid #3e4c77;
+  border: 1px solid #833cb3;
+  border-radius: 5px;
 }
-
 .main-content #selected-container .row .select-wrapper #asteroids-search:focus {
   outline: none;
 }
-
-.main-content #selected-container .row .collection-list-holder {
-  width: 60%;
-}
-
 .main-content #selected-container .row .collection-list-holder #collection-list {
   font-size: 18px;
   list-style: none;
 }
-
 .main-content #selected-container .row .collection-list-holder #collection-list .collection-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: 20px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-bottom: 1px solid #3e4c77;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(119, 119, 119, 0.664);
   font-size: 14px;
   margin: 10px;
 }
-
 .main-content #selected-container .row .collection-list-holder #collection-list .collection-item .fa {
   color: red;
 }
-
 .main-content #selected-container .row #next-page {
-  margin: 5px auto;
-  background-color: #3e4c77;
-  border-radius: 12px;
-  color: #ececec;
-  display: block;
-  font-size: 17px;
-  width: 80%;
-  padding: 5px 0;
+  margin: 10px auto;
+  background-color: #833cb3;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.5rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  padding: 10px 5px;
   font-size: 12px;
   margin-top: 10px;
 }
-/*# sourceMappingURL=main.css.map */
+.main-content #selected-container .row #next-page:hover {
+  background-color: white;
+  color: #0c0b0b;
+  font-size: 0.6rem;
+}
+
+@media screen and (min-width: 890px) {
+  .main-content .app-name {
+    font-size: 2rem;
+  }
+  .main-content .img {
+    margin-top: 10px;
+    width: 95px;
+    height: 90px;
+    background-size: 70px;
+  }
+  .main-content section.form h2, .main-content #table-container section#table h2, .main-content #selected-container section.row h2 {
+    font-size: 1.5rem;
+  }
+  .main-content section.form label, .main-content #table-container section#table label, .main-content #selected-container section.row label {
+    font-size: 1.2rem;
+  }
+  .main-content #table-container #table thead {
+    font-size: 0.9rem;
+  }
+}/*# sourceMappingURL=main.css.map */

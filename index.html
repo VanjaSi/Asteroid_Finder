@@ -9,63 +9,62 @@
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div class="nav-bar">
-                <a href="#">Potentially Dangerous Asteroids</a>
-            </div>
-        </div>
-    </header>
+    
     <div class="container">
         <main class="main-content">
-            <div class="form">
-                <div id="error-div" class="error-message"></div>
+            <h1 class="app-name">Dangerous Asteroids Finder - App</h1>
+            <div class="img"></div>
+            <section class="form">
+                <!-- <div id="error-div" class="error-message"></div> -->
+                <h2>To start your search, choose dates...</h2>
                 <div class="form-control">
-                    <label for="date1">Start date:</label>
                     <input  id="date1" type="date" class="input-field" >
+                    <label for="date1">Start date</label>
+                    
                 </div>
                 <div class="form-control">
-                    <label for="date2">End date: </label>
                     <input  id="date2" type="date" class="input-field" >
+                    <label for="date2">End date</label>
+                    
                 </div>
-                <button class="btn" id= "search-btn" type="submit">Prikazi Asteroide</button>
-            </div>
-            <div id="table-container">
+                <button class="btn" id= "search-btn" type="submit">Start </button>
+            </section>
+            <section id="table-container">
                 <table id="table">
                     <thead>
                         <tr>
-                            <th id="date-th"> Datum <a href="#"><i class="fa fa-sort-asc"></i></a></th>
-                            <th >Ime <a href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                            <th id="date-th"> Date <a href="#"><i class="fa fa-sort-asc"></i></a></th>
+                            <th >Name <a href="#"><i class="fa fa-sort-desc" aria-hidden="true"></i>
                             </a></th>
-                            <th>Brzina Kretanja <a><i class="fa fa-sort-asc"></i></a></th>
-                            <th>Max precnik <a><i class="fa fa-sort-asc"></i></a></th>
-                            <th>Min precnik <a></a><i class="fa fa-sort-asc"></i></a></th>
+                            <th>Speed <a><i class="fa fa-sort-asc"></i></a></th>
+                            <th>Max diameter <a><i class="fa fa-sort-asc"></i></a></th>
+                            <th>Min diameter <a></a><i class="fa fa-sort-asc"></i></a></th>
                         </tr>
                     </thead>
-                    <tbody id="tbody"></tbody>
+                    <tbody id="tbody">
+                     
+                    </tbody>
                 </table>
-            </div>
-            <div id="selected-container">
-                <div class="row">
-                    <div class="select-wrapper">
-                        <label for="asteroids">Choose an asteroid:</label>
-                        <input list="asteroids-list" id="asteroids-search">
-
-                        <datalist id="asteroids-list"></datalist>
+                <!-- selection option -->
+                <section id="selected-container">
+                    <div class="row">
+                        <div class="select-wrapper">
+                            <label for="asteroids">Choose an asteroid:</label>
+                            <input list="asteroids-list" id="asteroids-search">
+    
+                            <datalist id="asteroids-list"></datalist>
+                        </div>
+                        <div class="collection-list-holder">
+                            <ul id="collection-list"></ul>
+                            <button id="next-page">Show the number of Passes by Earth</button>
+                        </div>
                     </div>
-                    <div class="collection-list-holder">
-                        <ul id="collection-list"></ul>
-                        <button id="next-page">Broj Prolazaka pored zemlje</button>
-                    </div>
-                </div>
+                </section>
             </div>
+            
         </main>
     </div>
-    <footer class="main-footer">
-        <div class="container">
-            <small>Potentially Dangerous Asteroids &copy;2020</small>
-        </div>
-    </footer>
+    
     <script type="module" src="./src/main.js"></script>
 </body>
 </html>
